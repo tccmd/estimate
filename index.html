@@ -97,7 +97,7 @@
 				<!-- 아코디언 -->
 				<div class="accordion" id="accordionPanelsStayOpenExample">
 					<!-- 첫 번째 아코디언 아이템 -->
-					<div class="accordion-item">
+					<div class="accordion-item"  id="accordion1">
 					  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
 						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
 						  필수사항
@@ -137,11 +137,13 @@
 								</tr>
 							</tbody>
 						</table>
+						<button type="button" class="btn btn-primary" onclick="selectRequiredOptionsOnce('selectOptions1')">모두 추가</button>
+						<button type="button" class="btn btn-danger" onclick="clearAccordionTableExceptFirstRow1()">행 모두 지우기</button>
 						</div>
 					  </div>
 					</div>
 					<!-- 두 번째 아코디언 아이템 -->
-					<div class="accordion-item">
+					<div class="accordion-item" id="accordion2">
 					  <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
 						  선택사항
@@ -149,7 +151,6 @@
 					  </h2>
 					  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
 						<div class="accordion-body">
-						  <!-- <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
 						  <table class="table table-hover table-bordered" id="quoteTable">
 							<thead>
 								<tr>
@@ -181,6 +182,8 @@
 								</tr>
 							</tbody>
 						</table>
+						<button type="button" class="btn btn-primary" onclick="selectRequiredOptionsOnce('selectOptions2')">모두 추가</button>
+						<button type="button" class="btn btn-danger" onclick="clearAccordionTableExceptFirstRow2()">행 모두 지우기</button>
 						</div>
 					  </div>
 					</div>
@@ -193,7 +196,6 @@
 						</h2>
 						<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
 							<div class="accordion-body">
-						  <!-- <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
 						  <table class="table table-hover table-bordered" id="quoteTable">
 							<thead>
 								<tr>
@@ -220,7 +222,6 @@
 						</h2>
 						<div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show">
 							<div class="accordion-body">
-						  <!-- <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
 						  <table class="table table-hover table-bordered" id="quoteTable">
 							<thead>
 								<tr>
@@ -241,11 +242,6 @@
 				  </div>
 			</div>
 		</div>
-		<!-- <div class="row">
-			<div class="col-md-12">
-				
-			</div>
-		</div> -->
 		<div class="row">
 			<div class="col-md-12">
 				<table class="table">

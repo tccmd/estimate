@@ -11,6 +11,8 @@ window.onload = function () {
 function initialize() {
     // 현재 날짜 초기화
     initializeDate();
+    // 필수 옵션 모두 선택
+    selectRequiredOptionsOnce('selectOptions1');
 }
 
 // 상단에 배열 선언
@@ -72,8 +74,6 @@ window.addRow = (selectId) => {
             console.log("After Deletion:", specialRows);
         }
 
-        console.log(specialRows);
-
         if (
             specialRows.length >= 4 &&
             new Set(specialRows.map(row => row.cells[0].textContent)).size === 4 &&
@@ -100,8 +100,13 @@ window.addRow = (selectId) => {
 
 // 행을 삭제하는 함수
 export function deleteRow(row) {
-    row.parentNode.removeChild(row);
+    if (row.parentNode) {
+        row.parentNode.removeChild(row);
+    }
+
+    // 행이 원래 배열에 있는 인스턴스인지 확인하여 제거
     specialRows = specialRows.filter(existingRow => existingRow !== row);
+
     updateTotal();
 }
 
@@ -109,8 +114,85 @@ export function deleteRow(row) {
 window.clearAccordionTable = (accordionId) => {
     var accordionTable = document.querySelector(`#${accordionId} table tbody`);
     while (accordionTable.firstChild) {
-        accordionTable.removeChild(accordionTable.firstChild);
+        // accordionTable.removeChild(accordionTable.firstChild);
+        deleteRow(accordionTable.firstChild);
     }
     updateTotal();
     toggleAccordion(accordionId, false);
 }
+
+// 필수 옵션을 한번씩 추가하는 함수
+window.selectRequiredOptionsOnce = (selectOptions) => {
+    // 필수 옵션 목록 가져오기
+    const requiredOptions = Array.from(document.getElementById(selectOptions).options)
+        .filter(option => option.value !== 'none')
+        .map(option => option.value);
+
+    // 특정 이벤트를 발생시키기 위한 함수
+    function triggerEvent(element, eventName) {
+        const event = new Event(eventName, { bubbles: true });
+        element.dispatchEvent(event);
+    }
+
+    // 이미 선택된 옵션을 저장하는 Set
+    const selectedOptions = new Set();
+
+    // 필수 옵션을 반복하면서 한 번씩 선택
+    requiredOptions.forEach(option => {
+        const selectElement = document.getElementById(selectOptions);
+        if (selectElement && !selectedOptions.has(option)) {
+            // 필수 옵션이 아직 선택되지 않았다면, addRow 함수 호출
+            selectElement.value = option; // 수동으로 값 설정
+            triggerEvent(selectElement, 'change'); // change 이벤트 발생
+            selectedOptions.add(option);
+        }
+    });
+}
+
+// 특정 아코디언의 tbody 내부의 특정 행을 제외한 모든 행을 삭제하는 함수
+function clearAccordionTableExceptFirstRow(accordionId) {
+    var accordionTable = document.querySelector(`#${accordionId} table tbody`);
+    var rowsToKeep = accordionTable.querySelectorAll('tr:first-child');
+    
+    // Remove all rows except the first row
+    Array.from(accordionTable.children).forEach(row => {
+        if (!Array.from(rowsToKeep).includes(row)) {
+            row.parentNode.removeChild(row);
+        }
+    });
+    
+    updateTotal(); // Update total after clearing the table
+}
+
+// 첫 번째 아코디언 행 모두 지우기
+window.clearAccordionTableExceptFirstRow1 = () => {
+    clearAccordionTableExceptFirstRow('accordion1');
+}
+
+// 두 번째 아코디언 행 모두 지우기
+window.clearAccordionTableExceptFirstRow2 = () => {
+    clearAccordionTableExceptFirstRow('accordion2');
+}
+
+// 모든 아코디언 테이블의 버튼들을 토글하는 함수
+window.toggleAllAccordionButtons = () => {
+    // 모든 아코디언 아이템을 찾아서 버튼들을 설정
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    
+    accordionItems.forEach(accordionItem => {
+        const buttons = accordionItem.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            const computedStyle = window.getComputedStyle(button);
+            button.style.display = computedStyle.display === 'inline-block' ? 'none' : 'inline-block';
+        });
+    });
+}
+
+// 클릭 이벤트 리스너를 추가할 요소 가져오기
+const toggleButtonsTrigger = document.querySelector('.form-group');
+
+// 클릭 이벤트 리스너 추가
+toggleButtonsTrigger.addEventListener('click', function () {
+    // 클릭 시 toggleAllAccordionButtons 함수 실행
+    toggleAllAccordionButtons();
+});

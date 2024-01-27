@@ -1,0 +1,49 @@
+#quoteTable {
+    table-layout: fixed;
+}
+
+#quoteTable th {
+    text-align: center;
+}
+
+/* #quoteTable th,
+#quoteTable td {
+    box-sizing: border-box;
+    overflow: hidden;
+} */
+
+#quoteTable th:nth-child(1),
+#quoteTable td:nth-child(1) {
+    width: 30%; 
+}
+
+#quoteTable th:nth-child(2),
+#quoteTable td:nth-child(2) {
+    width: 10%; 
+}
+
+#quoteTable th:nth-child(3),
+#quoteTable td:nth-child(3) {
+    padding-right: 5px;
+}
+
+#quoteTable th:nth-child(4),
+#quoteTable td:nth-child(4) {
+    padding-right: 5px;
+}
+
+#quoteTable th:nth-child(5),
+#quoteTable td:nth-child(5) {
+    width: 20%; 
+}
+
+#quoteTable select {
+    width: 100%; 
+}
+
+#quoteTable input {
+    width: 100%;
+    border: none;
+    padding-right: 5px;
+    box-sizing: border-box; /* Include padding and border in the total width */
+}

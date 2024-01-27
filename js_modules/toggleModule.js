@@ -1,6 +1,5 @@
 // toggleModule.js
-import { specialRows } from '../index.js'
-import { deleteRow } from './rowModule.js';
+import { deleteRow } from '../index.js';
 
 // 특정 조건을 만족하는 행들을 열린 아코디언의 테이블로 옮깁니다.
 export function moveRowsToAccordionTable(specialRows, accordionId) {
@@ -20,30 +19,25 @@ export function moveRowsToAccordionTable(specialRows, accordionId) {
     });
 
     // 배열을 비웁니다.
-    specialRows = [];
+    specialRows.length = 0;
+
+    // 업데이트된 배열을 반환합니다.
+    return specialRows;
 }
 
 // 아코디언 아이템을 보이게 설정
-export function toggleAccordion(accordionId) {
+export function toggleAccordion(accordionId, isBlock) {
     var accordionItem = document.getElementById(accordionId);
     if (accordionItem) {
-        accordionItem.classList.remove('d-none');
-        accordionItem.classList.add('d-block');
+        if (isBlock) {
+            accordionItem.classList.remove('d-none');
+            accordionItem.classList.add('d-block');
+        } else {
+            accordionItem.classList.remove('d-block');
+            accordionItem.classList.add('d-none');
+        }
     }
 }
-
-// 특정 아코디언의 tbody 내부의 모든 행을 삭제합니다.
-export function clearAccordionTable(accordionId) {
-    // 열린 아코디언의 테이블을 찾습니다.
-    var accordionTable = document.querySelector(`#${accordionId} table tbody`);
-
-    // 모든 행을 삭제합니다.
-    while (accordionTable.firstChild) {
-        accordionTable.removeChild(accordionTable.firstChild);
-    }
-}
-
-
 
 
 // 토글 함수

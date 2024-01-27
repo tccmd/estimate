@@ -18,7 +18,7 @@
 
 <body>
 	<div class="container-fluid">
-		<div class="row sticky-top bg-dark mb-3">
+		<div class="row sticky-top bg-dark mb-3" id="header">
             <div class="col-md-12">
                 <h3 class="text-center text-light p-3">
                     견적서
@@ -137,7 +137,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<button type="button" class="btn btn-primary" onclick="selectRequiredOptionsOnce('selectOptions1')">모두 추가</button>
+						<button type="button" class="btn btn-outline-primary" onclick="selectRequiredOptionsOnce('selectOptions1')">모두 추가</button>
 						<button type="button" class="btn btn-danger" onclick="clearAccordionTableExceptFirstRow1()">행 모두 지우기</button>
 						</div>
 					  </div>
@@ -182,7 +182,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<button type="button" class="btn btn-primary" onclick="selectRequiredOptionsOnce('selectOptions2')">모두 추가</button>
+						<button type="button" class="btn btn-outline-primary" onclick="selectRequiredOptionsOnce('selectOptions2')">모두 추가</button>
 						<button type="button" class="btn btn-danger" onclick="clearAccordionTableExceptFirstRow2()">행 모두 지우기</button>
 						</div>
 					  </div>
@@ -254,7 +254,7 @@
 				 </table>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row mb-3">
 			<div class="col-md-12">
 				<div class="form-group">
 					<div class="input-group">
@@ -268,6 +268,7 @@
 
 	<script src="js/bootstrap.min.js"></script>
 	<script type="module" src="./index.js"></script>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 
 </html>

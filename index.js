@@ -153,14 +153,14 @@ window.selectRequiredOptionsOnce = (selectOptions) => {
 function clearAccordionTableExceptFirstRow(accordionId) {
     var accordionTable = document.querySelector(`#${accordionId} table tbody`);
     var rowsToKeep = accordionTable.querySelectorAll('tr:first-child');
-    
+
     // Remove all rows except the first row
     Array.from(accordionTable.children).forEach(row => {
         if (!Array.from(rowsToKeep).includes(row)) {
             row.parentNode.removeChild(row);
         }
     });
-    
+
     updateTotal(); // Update total after clearing the table
 }
 
@@ -178,7 +178,7 @@ window.clearAccordionTableExceptFirstRow2 = () => {
 window.toggleAllAccordionButtons = () => {
     // 모든 아코디언 아이템을 찾아서 버튼들을 설정
     const accordionItems = document.querySelectorAll('.accordion-item');
-    
+
     accordionItems.forEach(accordionItem => {
         const buttons = accordionItem.querySelectorAll('.btn');
         buttons.forEach(button => {
@@ -196,3 +196,59 @@ toggleButtonsTrigger.addEventListener('click', function () {
     // 클릭 시 toggleAllAccordionButtons 함수 실행
     toggleAllAccordionButtons();
 });
+
+// html2canvas 라이브러리를 사용하여 현재 페이지 스크롤 스크린샷 저장
+function captureAndSaveScreenshot() {
+    // 현재 페이지의 body 요소를 캡처
+    html2canvas(document.body).then(function (canvas) {
+        // 캔버스를 이미지 데이터 URL로 변환
+        var imageDataURL = canvas.toDataURL("image/png");
+
+        // 이미지를 저장할 링크 생성
+        var downloadLink = document.createElement("a");
+        downloadLink.href = imageDataURL;
+        downloadLink.download = "estimate.png";
+
+        // 링크를 클릭하여 이미지 다운로드
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    });
+}
+
+// // 견적서 헤더를 탭하면 스크린샷하는 이벤트 리스너 추가
+// document.getElementById("header").addEventListener("click", captureAndSaveScreenshot);
+
+
+function wer() {
+    // 현재 페이지 스크롤 위치 저장
+    const originalScrollY = window.scrollY;
+
+    // 페이지 맨 위로 스크롤
+    window.scrollTo(0, 0);
+
+    // 스크롤 위치가 맨 위로 이동한 후 스크린샷 찍기
+    setTimeout(() => {
+        // 현재 페이지 전체를 스크린샷으로 찍기
+        html2canvas(document.body).then(function (canvas) {
+            // 이미지 데이터 URL 얻기
+            var imageDataURL = canvas.toDataURL("image/png");
+
+            // 이미지를 저장할 링크 생성
+            var downloadLink = document.createElement("a");
+            downloadLink.href = imageDataURL;
+            downloadLink.download = "estimate.png";
+
+            // 링크를 클릭하여 이미지 다운로드
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+
+            // 원래 스크롤 위치로 복원
+            window.scrollTo(0, originalScrollY);
+        });
+    }, 500); // setTimeout 내의 시간은 스크롤이 맨 위로 이동하기까지의 대기 시간
+}
+
+// 견적서 헤더를 탭하면 스크린샷하는 이벤트 리스너 추가
+document.getElementById("header").addEventListener("click", wer);

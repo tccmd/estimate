@@ -18,31 +18,39 @@ export function moveRowsToAccordionTable(uniqueSpecialRows, accordionId) {
         // "공간 사진촬영" 행에 대해서만 클릭 이벤트 리스너 추가
         if (row.cells[0].textContent === "공간 사진촬영") {
             clonedRow.querySelector('td').addEventListener("click", function () {
-                // "공간 사진촬영" 행을 지우고 만들어진 행들을 다시 되돌린다
-                // removeAndRestoreRows();
-                window.clearAccordionTable('accordion3');
+                // "공간 사진촬영" 행을 지우고 만들어진 행들로 패키지2 생성
+                removeAndMoveRows(uniqueSpecialRows, clonedRow);
             });
         }
-        // // 클론된 행에 대한 클릭 이벤트 리스너 추가 (별개의 인스턴스이기 때문)
-        // clonedRow.querySelector('td').addEventListener("click", function () {
-        //     deleteRow(clonedRow);
-        // });
 
+        // 패키지에 추가했으니 배열에서 삭제
         deleteRow(row);
     });
 
-    uniqueSpecialRows.length = 0;
+    // 패키지를 생성하고 아코디언 자동으로 열리게
+    toggleAccordion(accordionId, true);
 
+    // 필요할 시 리턴
     return uniqueSpecialRows;
 }
 
-// // 함수 내부에서 사용하기 위한 함수로, 특정 조건을 만족하는 행을 찾아 삭제합니다.
-// function removeSpecialRow(rows, condition) {
-//     const uniqueSpecialRows = rows.find(condition);
-//     if (uniqueSpecialRows) {
-//         deleteRow(uniqueSpecialRows);
-//     }
-// }
+// 되돌리는 함수
+function removeAndMoveRows (uniqueSpecialRows, clonedRow) {
+    // 패키지 1의 행들 모두 지우기
+    window.clearAccordionTable("accordion3");
+    // deleteRow(clonedRow);
+
+    // clonedRow를 제외한 새로운 배열을 생성
+    uniqueSpecialRows = uniqueSpecialRows.filter(row => !row.isEqualNode(clonedRow));
+
+    console.log(uniqueSpecialRows);
+
+    // clonedRow를 제외한 새로운 배열로 패키지2 생성
+    moveRowsToAccordionTable(uniqueSpecialRows, "accordion4");
+
+    // 배열 비우기
+    uniqueSpecialRows.length = 0;
+}
 
 // 아코디언 아이템을 보이게 설정
 export function toggleAccordion(accordionId, isBlock) {

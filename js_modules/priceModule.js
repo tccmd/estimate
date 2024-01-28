@@ -52,6 +52,21 @@ export function updateTotal() {
         totalAmount += result;
     });
 
+    // // 부가세 포함 합계 계산
+    // var vatRate = 0.1; // 10%
+    // var totalWithVatElement = document.getElementById('totalWithVat1');
+    // var totalWithVatElement2 = document.getElementById('totalWithVat2');
+    // var totalWithVatElement3 = document.getElementById('totalWithVat3');
+    // var vatIncludedTotal = totalAmount + (totalAmount * vatRate); // assuming 10% VAT
+
+    // // 특정 형식으로 포맷팅
+    // var formattedVatIncludedTotal = numberToKorean(Math.floor(vatIncludedTotal));
+
+    // // 결과 업데이트
+    // totalAmountElement.textContent = numberWithCommas(totalAmount);
+    // totalWithVatElement.textContent = formattedVatIncludedTotal;
+    // totalWithVatElement2.textContent = numberWithCommas(vatIncludedTotal);
+    // totalWithVatElement3.textContent = " 원)";
     // 부가세 포함 합계 계산
     var vatRate = 0.1; // 10%
     var totalWithVatElement = document.getElementById('totalWithVat1');
@@ -72,9 +87,12 @@ export function updateTotal() {
 // 네 번째 열을 계산하고 업데이트하는 함수
 export function updateProduct(row) {
     var quantity = row.querySelector("td:nth-child(2) input").value;
-    var unitPrice = row.querySelector("td:nth-child(3)").textContent;
+    var unitPrice = parseFloat(row.querySelector("td:nth-child(3)").textContent.replace(/,/g, '')) || 0;
+    // var unitPrice = row.querySelector("td:nth-child(3)").textContent;
     var product = quantity * unitPrice;
-    row.querySelector("td:nth-child(4)").textContent = product;
+
+    // 숫자에 콤마 추가
+    row.querySelector("td:nth-child(4)").textContent = numberWithCommas(product);
 
     // 합계 업데이트 호출
     updateTotal();

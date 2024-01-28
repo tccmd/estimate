@@ -1,5 +1,5 @@
 import { initializeDate } from './js_modules/dateModule.js';
-import { getUnitPrice, updateProduct, updateTotal } from './js_modules/priceModule.js';
+import { numberWithCommas, getUnitPrice, updateProduct, updateTotal } from './js_modules/priceModule.js';
 import { moveRowsToAccordionTable, toggleAccordion } from './js_modules/toggleModule.js';
 
 // 페이지 로드 시 초기화 함수 호출
@@ -47,7 +47,7 @@ window.addRow = (selectId) => {
 
         var cell3 = document.createElement("td");
         var unitPrice = getUnitPrice(selectedOption);
-        cell3.textContent = unitPrice;
+        cell3.textContent = numberWithCommas(unitPrice);
         cell3.className = "unit-price";
         newRow.appendChild(cell3);
 
@@ -71,7 +71,7 @@ window.addRow = (selectId) => {
             !specialRows.includes(newRow)
         ) {
             specialRows.push(newRow);
-            console.log("After Deletion:", specialRows);
+            console.log("specialRows:", specialRows);
         }
 
         if (
@@ -83,7 +83,9 @@ window.addRow = (selectId) => {
         ) {
             const uniqueSpecialRows = [...new Set(specialRows)];
             moveRowsToAccordionTable(uniqueSpecialRows, "accordion3");
-            toggleAccordion("accordion3", true);
+
+            console.log("specialRows:", specialRows);
+            console.log("uniqueSpecialRows:", uniqueSpecialRows);
         } else if (
             specialRows.length >= 3 &&
             new Set(specialRows.map(row => row.cells[0].textContent)).size === 3 &&
@@ -93,7 +95,9 @@ window.addRow = (selectId) => {
         ) {
             const uniqueSpecialRows = [...new Set(specialRows)];
             moveRowsToAccordionTable(uniqueSpecialRows, "accordion4");
-            toggleAccordion("accordion4", true);
+
+            console.log("specialRows:", specialRows);
+            console.log("uniqueSpecialRows:", uniqueSpecialRows);
         }
     }
 }
@@ -110,7 +114,7 @@ export function deleteRow(row) {
     updateTotal();
 }
 
-// 특정 아코디언의 tbody 내부의 모든 행을 삭제하는 함수
+// 특정 아코디언의 tbody 내부의 모든 행을 삭제하는 함수 (아코디언3, 4)
 window.clearAccordionTable = (accordionId) => {
     var accordionTable = document.querySelector(`#${accordionId} table tbody`);
     while (accordionTable.firstChild) {
@@ -149,7 +153,7 @@ window.selectRequiredOptionsOnce = (selectOptions) => {
     });
 }
 
-// 특정 아코디언의 tbody 내부의 특정 행을 제외한 모든 행을 삭제하는 함수
+// 특정 아코디언의 tbody 내부의 thead, tr[0] 행을 제외한 모든 행을 삭제하는 함수 (아코디언1, 2)
 function clearAccordionTableExceptFirstRow(accordionId) {
     var accordionTable = document.querySelector(`#${accordionId} table tbody`);
     var rowsToKeep = accordionTable.querySelectorAll('tr:first-child');
@@ -174,7 +178,7 @@ window.clearAccordionTableExceptFirstRow2 = () => {
     clearAccordionTableExceptFirstRow('accordion2');
 }
 
-// 모든 아코디언 테이블의 버튼들을 토글하는 함수
+// 모든 아코디언 테이블의 버튼들을 토글하는 함수 (비고)
 window.toggleAllAccordionButtons = () => {
     // 모든 아코디언 아이템을 찾아서 버튼들을 설정
     const accordionItems = document.querySelectorAll('.accordion-item');
@@ -188,39 +192,49 @@ window.toggleAllAccordionButtons = () => {
     });
 }
 
-// 클릭 이벤트 리스너를 추가할 요소 가져오기
+// 클릭 이벤트 리스너를 추가할 요소 가져오기 (비고)
 const toggleButtonsTrigger = document.querySelector('.form-group');
 
 // 클릭 이벤트 리스너 추가
 toggleButtonsTrigger.addEventListener('click', function () {
-    // 클릭 시 toggleAllAccordionButtons 함수 실행
     toggleAllAccordionButtons();
 });
 
-// html2canvas 라이브러리를 사용하여 현재 페이지 스크롤 스크린샷 저장
-function captureAndSaveScreenshot() {
-    // 현재 페이지의 body 요소를 캡처
-    html2canvas(document.body).then(function (canvas) {
-        // 캔버스를 이미지 데이터 URL로 변환
-        var imageDataURL = canvas.toDataURL("image/png");
+// // 스크린샷
+// function screenShot() {
+//     // 현재 페이지 스크롤 위치 저장
+//     const originalScrollY = window.scrollY;
 
-        // 이미지를 저장할 링크 생성
-        var downloadLink = document.createElement("a");
-        downloadLink.href = imageDataURL;
-        downloadLink.download = "estimate.png";
+//     // 페이지 맨 위로 스크롤
+//     window.scrollTo(0, 0);
 
-        // 링크를 클릭하여 이미지 다운로드
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    });
-}
+//     // 스크롤 위치가 맨 위로 이동한 후 스크린샷 찍기
+//     setTimeout(() => {
+//         // 현재 페이지 전체를 스크린샷으로 찍기
+//         html2canvas(document.body).then(function (canvas) {
+//             // 이미지 데이터 URL 얻기
+//             var imageDataURL = canvas.toDataURL("image/png");
+
+//             // 이미지를 저장할 링크 생성
+//             var downloadLink = document.createElement("a");
+//             downloadLink.href = imageDataURL;
+//             downloadLink.download = "estimate.png";
+
+//             // 링크를 클릭하여 이미지 다운로드
+//             document.body.appendChild(downloadLink);
+//             downloadLink.click();
+//             document.body.removeChild(downloadLink);
+
+//             // 원래 스크롤 위치로 복원
+//             window.scrollTo(0, originalScrollY);
+//         });
+//     }, 500); // setTimeout 내의 시간은 스크롤이 맨 위로 이동하기까지의 대기 시간
+// }
 
 // // 견적서 헤더를 탭하면 스크린샷하는 이벤트 리스너 추가
-// document.getElementById("header").addEventListener("click", captureAndSaveScreenshot);
+// document.getElementById("header").addEventListener("click", screenShot);
 
-
-function wer() {
+function screenShot() {
     // 현재 페이지 스크롤 위치 저장
     const originalScrollY = window.scrollY;
 
@@ -230,6 +244,7 @@ function wer() {
     // 스크롤 위치가 맨 위로 이동한 후 스크린샷 찍기
     setTimeout(() => {
         // 현재 페이지 전체를 스크린샷으로 찍기
+        window.scrollTo(0, 0);
         html2canvas(document.body).then(function (canvas) {
             // 이미지 데이터 URL 얻기
             var imageDataURL = canvas.toDataURL("image/png");
@@ -251,4 +266,4 @@ function wer() {
 }
 
 // 견적서 헤더를 탭하면 스크린샷하는 이벤트 리스너 추가
-document.getElementById("header").addEventListener("click", wer);
+document.getElementById("header").addEventListener("click", screenShot);

@@ -73,7 +73,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<table class="table">
+				<!-- <table class="table">
 					<thead>
 					   <tr>
 						  <th>견적금액(부가세포함)</th>
@@ -84,8 +84,8 @@
 						</th>
 					   </tr>
 					</thead>
-				 </table>
-				<!-- <table class="table">
+				 </table> -->
+				<table class="table">
 					<thead>
 						<tr>
 							<th style="width: 50%;">견적금액(부가세포함)</th>
@@ -100,7 +100,7 @@
 							</th>
 						</tr>
 					</thead>
-				</table> -->
+				</table>
 			</div>
 		</div>
 		<!-- <div class="row">
@@ -140,14 +140,18 @@
 										<tr>
 											<td>
 												<select id="selectOptions1" onchange="addRow('selectOptions1')">
-													<option value="none">필수사항</option>
-													<option value="기본 3D 공간촬영 (20평 기준)">기본 3D 공간촬영 (20평 기준)</option>
-													<option value="서버유지보수비">서버유지보수비</option>
-													<option value="UI 커스텀">UI 커스텀</option>
-													<option value="트림 보정작업">트림 보정작업</option>
-													<option value="태그">태그</option>
-													<option value="평수 추가">평수 추가</option>
+													<optgroup label="필수사항">
+														<!-- <option value="none">필수사항</option> -->
+														<option value="기본 3D 공간촬영 (20평 기준)">기본 3D 공간촬영 (20평 기준)</option>
+														<option value="서버유지보수비">서버유지보수비</option>
+														<option value="UI 커스텀">UI 커스텀</option>
+														<option value="트림 보정작업">트림 보정작업</option>
+														<option value="태그">태그</option>
+														<option value="평수 추가">평수 추가</option>
+													</optgroup>
 												</select>
+												<!-- 대체할 텍스트 엘리먼트 -->
+<span id="textReplacement1"></span>
 											</td>
 											<td></td>
 											<td></td>
@@ -189,14 +193,20 @@
 										<!-- 두 번째 행 -->
 										<tr>
 											<td>
-												<select id="selectOptions2" onchange="addRow('selectOptions2')">
-													<option value="none">선택사항</option>
-													<option value="색감 보정작업">색감 보정작업</option>
-													<option value="네비게이션">네비게이션</option>
-													<option value="공간 사진촬영">공간 사진촬영</option>
-													<option value="공간 마케팅촬영">공간 마케팅촬영</option>
-													<option value="드론 항공촬영">드론 항공촬영</option>
-													<option value="인터뷰촬영">인터뷰촬영</option>
+												<select  id="selectOptions2" onchange="addRow('selectOptions2')">
+													<!-- <option value="none">선택사항</option> -->
+													<optgroup label="선택사항">
+														<option value="색감 보정작업">색감 보정작업</option>
+														<option value="네비게이션">네비게이션</option>
+													</optgroup>
+													<optgroup label="------------------">
+														<option value="공간 사진촬영">공간 사진촬영</option>
+														<option value="공간 마케팅촬영">공간 마케팅촬영</option>
+														<option value="드론 항공촬영">드론 항공촬영</option>
+														<option value="인터뷰촬영">인터뷰촬영</option>
+													</optgroup>
+													<!-- 대체할 텍스트 엘리먼트 -->
+<span id="textReplacement2"></span>
 												</select>
 											</td>
 											<td></td>
@@ -281,7 +291,7 @@
 						<tr>
 							<td>공급가액합계</td>
 							<td class="d-flex justify-content-end"><span class="user-select-all"
-									id="totalAmount">0</span> (부가세 별도)</td>
+									id="totalAmount">0</span> &nbsp;(부가세 별도)</td>
 						</tr>
 					</thead>
 				</table>

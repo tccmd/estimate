@@ -234,7 +234,74 @@ toggleButtonsTrigger.addEventListener('click', function () {
 // // 견적서 헤더를 탭하면 스크린샷하는 이벤트 리스너 추가
 // document.getElementById("header").addEventListener("click", screenShot);
 
+// function screenShot() {
+//     // 현재 페이지 스크롤 위치 저장
+//     const originalScrollY = window.scrollY;
+
+//     // 페이지 맨 위로 스크롤
+//     window.scrollTo(0, 0);
+
+//     // 스크롤 위치가 맨 위로 이동한 후 스크린샷 찍기
+//     setTimeout(() => {
+//         // 현재 페이지 전체를 스크린샷으로 찍기
+//         window.scrollTo(0, 0);
+//         html2canvas(document.body).then(function (canvas) {
+//             // 이미지 데이터 URL 얻기
+//             var imageDataURL = canvas.toDataURL("image/png");
+
+//             // 이미지를 저장할 링크 생성
+//             var downloadLink = document.createElement("a");
+//             downloadLink.href = imageDataURL;
+//             downloadLink.download = "estimate.png";
+
+//             // 링크를 클릭하여 이미지 다운로드
+//             document.body.appendChild(downloadLink);
+//             downloadLink.click();
+//             document.body.removeChild(downloadLink);
+
+//             // 원래 스크롤 위치로 복원
+//             window.scrollTo(0, originalScrollY);
+//         });
+//     }, 500); // setTimeout 내의 시간은 스크롤이 맨 위로 이동하기까지의 대기 시간
+// }
+
+// // 견적서 헤더를 탭하면 스크린샷하는 이벤트 리스너 추가
+// document.getElementById("header").addEventListener("click", screenShot);
+
+// 스크린샷 전에 숨기는 함수
+function hideSelectBoxForScreenshot() {
+    // var selectBox1 = document.getElementById("selectOptions1");
+    // var selectBox2 = document.getElementById("selectOptions2");
+    var elementToRemove1 = document.querySelector('#panelsStayOpen-collapseOne tbody tr:nth-child(1)');
+    var elementToRemove2 = document.querySelector('#panelsStayOpen-collapseTwo tbody tr:nth-child(1)');
+
+    if (elementToRemove1 && elementToRemove2) {
+        // selectBox1.style.display = 'none';
+        // selectBox2.style.display = 'none';
+        elementToRemove1.style.display = 'none';
+        elementToRemove2.style.display = 'none';
+    }
+}
+
+// 스크린샷 후에 다시 표시하는 함수
+function showSelectBoxAfterScreenshot() {
+    // var selectBox1 = document.getElementById("selectOptions1");
+    // var selectBox2 = document.getElementById("selectOptions2");
+    var elementToRemove1 = document.querySelector('#panelsStayOpen-collapseOne tbody tr:nth-child(1)');
+    var elementToRemove2 = document.querySelector('#panelsStayOpen-collapseTwo tbody tr:nth-child(1)');
+    if (elementToRemove1 && elementToRemove2) {
+        // selectBox1.style.display = 'block';
+        // selectBox2.style.display = 'block';
+        elementToRemove1.style.display = 'table-row';
+        elementToRemove2.style.display = 'table-row';
+    }
+}
+
 function screenShot() {
+
+    // 셀렉트 박스 숨기기
+    hideSelectBoxForScreenshot();
+
     // 현재 페이지 스크롤 위치 저장
     const originalScrollY = window.scrollY;
 
@@ -245,7 +312,7 @@ function screenShot() {
     setTimeout(() => {
         // 현재 페이지 전체를 스크린샷으로 찍기
         window.scrollTo(0, 0);
-        html2canvas(document.body).then(function (canvas) {
+        html2canvas(document.body, { scale: 2, windowWidth: document.body.scrollWidth, windowHeight: document.body.scrollHeight, scrollX: 0, scrollY: 0 }).then(function (canvas) {
             // 이미지 데이터 URL 얻기
             var imageDataURL = canvas.toDataURL("image/png");
 
@@ -261,6 +328,10 @@ function screenShot() {
 
             // 원래 스크롤 위치로 복원
             window.scrollTo(0, originalScrollY);
+
+            // 요소 다시 표시
+            showSelectBoxAfterScreenshot();
+
         });
     }, 500); // setTimeout 내의 시간은 스크롤이 맨 위로 이동하기까지의 대기 시간
 }

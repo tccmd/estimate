@@ -82,7 +82,7 @@ window.addRow = (selectId) => {
             )
         ) {
             const uniqueSpecialRows = [...new Set(specialRows)];
-            moveRowsToAccordionTable(uniqueSpecialRows, "accordion3");
+            moveRowsToAccordionTable(uniqueSpecialRows, "accordion4", true);
 
             console.log("specialRows:", specialRows);
             console.log("uniqueSpecialRows:", uniqueSpecialRows);
@@ -94,7 +94,7 @@ window.addRow = (selectId) => {
             )
         ) {
             const uniqueSpecialRows = [...new Set(specialRows)];
-            moveRowsToAccordionTable(uniqueSpecialRows, "accordion4");
+            moveRowsToAccordionTable(uniqueSpecialRows, "accordion3", true);
 
             console.log("specialRows:", specialRows);
             console.log("uniqueSpecialRows:", uniqueSpecialRows);

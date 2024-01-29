@@ -12,6 +12,8 @@ export function getUnitPrice(option) {
             return 500000;
         case "서버유지보수비":
             return 80000;
+        case "서버유지보수비 1년":
+            return 384000;
         case "UI 커스텀":
             return 550000;
         case "트림 보정작업":
@@ -35,7 +37,7 @@ export function getUnitPrice(option) {
         case "패키지촬영1":
             return 850000;
         case "패키지촬영2":
-            return 1200000;
+            return 1070000;
         default:
             return 0;
     }

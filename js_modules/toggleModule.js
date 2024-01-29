@@ -124,9 +124,3 @@ export function toggleAccordion(accordionId, isBlock) {
         }
     }
 }
-
-// // 할인을 적용하기 전에 기존 할인 값을 가져오고 숫자로 변환
-// var currentDiscount = parseFloat(row.cells[3].textContent.replace(/,/g, '')) || 0;
-
-// // 할인을 적용하고 문자열로 변환하여 업데이트
-// clonedRow.cells[3].textContent = numberWithCommas(currentDiscount * 0.51);

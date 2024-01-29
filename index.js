@@ -66,6 +66,13 @@ window.addRow = (selectId) => {
 
         updateProduct(newRow);
 
+        // // 서버 유지보수비 행에 클릭 이벤트 리스너 부여
+        // if (selectedOption === "서버유지보수비") {
+        //     newRow.addEventListener("click", function () {
+                
+        //     });
+        // }
+
         if (
             (selectedOption === "공간 사진촬영" || selectedOption === "공간 마케팅촬영" || selectedOption === "드론 항공촬영" || selectedOption === "인터뷰촬영") &&
             !specialRows.includes(newRow)
@@ -129,7 +136,7 @@ window.clearAccordionTable = (accordionId) => {
 window.selectRequiredOptionsOnce = (selectOptions) => {
     // 필수 옵션 목록 가져오기
     const requiredOptions = Array.from(document.getElementById(selectOptions).options)
-        .filter(option => option.value !== 'none')
+        .filter(option => option.value !== 'none' && option.value !== '서버유지보수비 1년')
         .map(option => option.value);
 
     // 특정 이벤트를 발생시키기 위한 함수

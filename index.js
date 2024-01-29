@@ -179,7 +179,7 @@ window.clearAccordionTableExceptFirstRow2 = () => {
 }
 
 // 모든 아코디언 테이블의 버튼들을 토글하는 함수 (비고)
-window.toggleAllAccordionButtons = () => {
+window.toggleAllAccordionButtons = (open = true) => {
     // 모든 아코디언 아이템을 찾아서 버튼들을 설정
     const accordionItems = document.querySelectorAll('.accordion-item');
 
@@ -187,7 +187,12 @@ window.toggleAllAccordionButtons = () => {
         const buttons = accordionItem.querySelectorAll('.btn');
         buttons.forEach(button => {
             const computedStyle = window.getComputedStyle(button);
-            button.style.display = computedStyle.display === 'inline-block' ? 'none' : 'inline-block';
+            if (open) {
+                button.style.display = computedStyle.display === 'inline-block' ? 'none' : 'inline-block';
+                // button.style.display = 'inline-block';
+            } else {
+                button.style.display = 'none';
+            }
         });
     });
 }
@@ -199,74 +204,6 @@ const toggleButtonsTrigger = document.querySelector('.form-group');
 toggleButtonsTrigger.addEventListener('click', function () {
     toggleAllAccordionButtons();
 });
-
-// // 스크린샷
-// function screenShot() {
-//     // 현재 페이지 스크롤 위치 저장
-//     const originalScrollY = window.scrollY;
-
-//     // 페이지 맨 위로 스크롤
-//     window.scrollTo(0, 0);
-
-//     // 스크롤 위치가 맨 위로 이동한 후 스크린샷 찍기
-//     setTimeout(() => {
-//         // 현재 페이지 전체를 스크린샷으로 찍기
-//         html2canvas(document.body).then(function (canvas) {
-//             // 이미지 데이터 URL 얻기
-//             var imageDataURL = canvas.toDataURL("image/png");
-
-//             // 이미지를 저장할 링크 생성
-//             var downloadLink = document.createElement("a");
-//             downloadLink.href = imageDataURL;
-//             downloadLink.download = "estimate.png";
-
-//             // 링크를 클릭하여 이미지 다운로드
-//             document.body.appendChild(downloadLink);
-//             downloadLink.click();
-//             document.body.removeChild(downloadLink);
-
-//             // 원래 스크롤 위치로 복원
-//             window.scrollTo(0, originalScrollY);
-//         });
-//     }, 500); // setTimeout 내의 시간은 스크롤이 맨 위로 이동하기까지의 대기 시간
-// }
-
-// // 견적서 헤더를 탭하면 스크린샷하는 이벤트 리스너 추가
-// document.getElementById("header").addEventListener("click", screenShot);
-
-// function screenShot() {
-//     // 현재 페이지 스크롤 위치 저장
-//     const originalScrollY = window.scrollY;
-
-//     // 페이지 맨 위로 스크롤
-//     window.scrollTo(0, 0);
-
-//     // 스크롤 위치가 맨 위로 이동한 후 스크린샷 찍기
-//     setTimeout(() => {
-//         // 현재 페이지 전체를 스크린샷으로 찍기
-//         window.scrollTo(0, 0);
-//         html2canvas(document.body).then(function (canvas) {
-//             // 이미지 데이터 URL 얻기
-//             var imageDataURL = canvas.toDataURL("image/png");
-
-//             // 이미지를 저장할 링크 생성
-//             var downloadLink = document.createElement("a");
-//             downloadLink.href = imageDataURL;
-//             downloadLink.download = "estimate.png";
-
-//             // 링크를 클릭하여 이미지 다운로드
-//             document.body.appendChild(downloadLink);
-//             downloadLink.click();
-//             document.body.removeChild(downloadLink);
-
-//             // 원래 스크롤 위치로 복원
-//             window.scrollTo(0, originalScrollY);
-//         });
-//     }, 500); // setTimeout 내의 시간은 스크롤이 맨 위로 이동하기까지의 대기 시간
-// }
-
-// // 견적서 헤더를 탭하면 스크린샷하는 이벤트 리스너 추가
-// document.getElementById("header").addEventListener("click", screenShot);
 
 // 스크린샷 전에 숨기는 함수
 function hideSelectBoxForScreenshot() {
@@ -298,6 +235,9 @@ function showSelectBoxAfterScreenshot() {
 }
 
 function screenShot() {
+
+    // 버튼 숨기기
+    window.toggleAllAccordionButtons(false);
 
     // 셀렉트 박스 숨기기
     hideSelectBoxForScreenshot();

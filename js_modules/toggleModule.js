@@ -39,6 +39,14 @@ export function moveRowsToAccordionTable(uniqueSpecialRows, accordionId, discoun
         deleteRow(row);
     });
 
+    // "accordion4"이면서 "result" 열 값이 음수일 때의 행을 추가
+    if (accordionId === "accordion4") {
+        var hiddenRow = document.createElement('tr');
+        hiddenRow.className = 'd-none';
+        hiddenRow.innerHTML = '<td></td><td></td><td></td><td class="result">-5000</td><td></td>';
+        accordionTable.appendChild(hiddenRow);
+    }
+
     // 패키지를 생성하고 아코디언 자동으로 열리게
     toggleAccordion(accordionId, true);
 

@@ -12,11 +12,11 @@ export function createAccordion(id, title) {
     headerDiv.id = 'panelsStayOpen-heading' + id;
 
     var button = document.createElement('button');
-    button.className = 'accordion-button collapsed';
+    button.className = 'accordion-button';
     button.type = 'button';
     button.setAttribute('data-bs-toggle', 'collapse');
     button.setAttribute('data-bs-target', '#panelsStayOpen-collapse' + id);
-    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-expanded', 'true');
     button.setAttribute('aria-controls', 'panelsStayOpen-collapse' + id);
 
     button.innerText = title;

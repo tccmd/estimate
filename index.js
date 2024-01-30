@@ -153,10 +153,17 @@ window.clearAccordionTable = (accordionId) => {
 
 // 필수 옵션을 한번씩 추가하는 함수
 window.selectRequiredOptionsOnce = (selectOptions) => {
+    const isReverse = selectOptions === 'selectOptions1'; // 역순 여부 결정
+
     // 필수 옵션 목록 가져오기
     const requiredOptions = Array.from(document.getElementById(selectOptions).options)
         .filter(option => option.value !== 'none' && option.value !== '서버유지보수비 1년')
-        .map(option => option.value);
+        .map(option => option.value); 
+        
+    // 역순으로 정렬
+    if (isReverse) {
+        requiredOptions.reverse();
+    }
 
     // 특정 이벤트를 발생시키기 위한 함수
     function triggerEvent(element, eventName) {

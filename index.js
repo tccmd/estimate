@@ -1,6 +1,7 @@
 import { initializeDate } from './js_modules/dateModule.js';
 import { numberWithCommas, getUnitPrice, updateProduct, updateTotal } from './js_modules/priceModule.js';
-import { moveRowsToAccordionTable, toggleAccordion } from './js_modules/toggleModule.js';
+import { moveRowsToAccordionTable } from './js_modules/toggleModule.js';
+import { createAccordion } from './js_modules/accordion.js'
 
 // 페이지 로드 시 초기화 함수 호출
 window.onload = function () {
@@ -66,13 +67,6 @@ window.addRow = (selectId) => {
 
         updateProduct(newRow);
 
-        // // 서버 유지보수비 행에 클릭 이벤트 리스너 부여
-        // if (selectedOption === "서버유지보수비") {
-        //     newRow.addEventListener("click", function () {
-                
-        //     });
-        // }
-
         if (
             (selectedOption === "공간 사진촬영" || selectedOption === "공간 마케팅촬영" || selectedOption === "드론 항공촬영" || selectedOption === "인터뷰촬영") &&
             !specialRows.includes(newRow)
@@ -81,6 +75,7 @@ window.addRow = (selectId) => {
             console.log("specialRows:", specialRows);
         }
 
+        // 패키지
         if (
             specialRows.length >= 4 &&
             new Set(specialRows.map(row => row.cells[0].textContent)).size === 4 &&
@@ -88,24 +83,46 @@ window.addRow = (selectId) => {
                 ["공간 사진촬영", "공간 마케팅촬영", "드론 항공촬영", "인터뷰촬영"].includes(row.cells[0].textContent)
             )
         ) {
+            var newAccordionId = "accordionPackage4" + window.generateRandomString(2);
+            createAccordion(newAccordionId, "패키지 촬영4 20% 할인");
             const uniqueSpecialRows = [...new Set(specialRows)];
-            moveRowsToAccordionTable(uniqueSpecialRows, "accordion4", true);
-
-            console.log("specialRows:", specialRows);
-            console.log("uniqueSpecialRows:", uniqueSpecialRows);
-        } else if (
-            specialRows.length >= 3 &&
-            new Set(specialRows.map(row => row.cells[0].textContent)).size === 3 &&
-            specialRows.every(row =>
-                ["공간 마케팅촬영", "드론 항공촬영", "인터뷰촬영"].includes(row.cells[0].textContent)
-            )
-        ) {
-            const uniqueSpecialRows = [...new Set(specialRows)];
-            moveRowsToAccordionTable(uniqueSpecialRows, "accordion3", true);
-
-            console.log("specialRows:", specialRows);
-            console.log("uniqueSpecialRows:", uniqueSpecialRows);
+            moveRowsToAccordionTable(uniqueSpecialRows, newAccordionId, true);
         }
+
+        // if (
+        //     specialRows.length >= 4 &&
+        //     new Set(specialRows.map(row => row.cells[0].textContent)).size === 3 &&
+        //     specialRows.every(row =>
+        //         ["공간 마케팅촬영", "드론 항공촬영", "인터뷰촬영"].includes(row.cells[0].textContent) &&
+        //         !["공간 사진촬영"].includes(row.cells[0].textContent)
+        //     )
+        // ) {
+        //     createAccordion("accordionPackage1", "패키지 촬영1 10% 할인");
+        //     const uniqueSpecialRows = [...new Set(specialRows)];
+        //     moveRowsToAccordionTable(uniqueSpecialRows, "accordionPackage1", true);
+        // } else if (
+        //     specialRows.length >= 4 &&
+        //     new Set(specialRows.map(row => row.cells[0].textContent)).size === 3 &&
+        //     specialRows.every(row =>
+        //         ["공간 사진촬영", "공간 마케팅촬영", "드론 항공촬영"].includes(row.cells[0].textContent) &&
+        //         !["인터뷰촬영"].includes(row.cells[0].textContent)
+        //     )
+        // ) {
+        //     createAccordion("accordionPackage2", "패키지 촬영2 10% 할인");
+        //     const uniqueSpecialRows = [...new Set(specialRows)];
+        //     moveRowsToAccordionTable(uniqueSpecialRows, "accordionPackage2", true);
+        // } else if (
+        //     specialRows.length >= 4 &&
+        //     new Set(specialRows.map(row => row.cells[0].textContent)).size === 3 &&
+        //     specialRows.every(row =>
+        //         ["공간 사진촬영", "공간 마케팅촬영", "인터뷰촬영"].includes(row.cells[0].textContent) &&
+        //         !["드론 항공촬영"].includes(row.cells[0].textContent)
+        //     )
+        // ) {
+        //     createAccordion("accordionPackage3", "패키지 촬영3 10% 할인");
+        //     const uniqueSpecialRows = [...new Set(specialRows)];
+        //     moveRowsToAccordionTable(uniqueSpecialRows, "accordionPackage3", true);
+        // }
     }
 }
 
@@ -121,7 +138,7 @@ export function deleteRow(row) {
     updateTotal();
 }
 
-// 특정 아코디언의 tbody 내부의 모든 행을 삭제하는 함수 (아코디언3, 4)
+// // 특정 아코디언의 tbody 내부의 모든 행을 삭제하는 함수 (아코디언3, 4)
 window.clearAccordionTable = (accordionId) => {
     var accordionTable = document.querySelector(`#${accordionId} table tbody`);
     while (accordionTable.firstChild) {
@@ -129,7 +146,9 @@ window.clearAccordionTable = (accordionId) => {
         deleteRow(accordionTable.firstChild);
     }
     updateTotal();
-    toggleAccordion(accordionId, false);
+    // 아코디언도 삭제
+    window.removeAccordion(accordionId);
+    // toggleAccordion(accordionId, false);
 }
 
 // 필수 옵션을 한번씩 추가하는 함수
@@ -285,3 +304,15 @@ function screenShot() {
 
 // 견적서 헤더를 탭하면 스크린샷하는 이벤트 리스너 추가
 document.getElementById("header").addEventListener("click", screenShot);
+
+// Function to generate a random two-letter string
+window.generateRandomString = (length) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let result = '';
+
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    return result;
+}

@@ -35,9 +35,13 @@ export function getUnitPrice(option) {
         case "인터뷰촬영":
             return 500000;
         case "패키지촬영1":
-            return 850000;
+            return 1530000;
         case "패키지촬영2":
-            return 1070000;
+            return 1485000;
+        case "패키지촬영3":
+            return 1485000;
+        case "패키지촬영4":
+            return 1720000;
         default:
             return 0;
     }

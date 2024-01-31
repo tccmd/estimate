@@ -292,7 +292,7 @@ function screenShot() {
             // 이미지를 저장할 링크 생성
             var downloadLink = document.createElement("a");
             downloadLink.href = imageDataURL;
-            downloadLink.download = "estimate.png";
+            downloadLink.download = "견적서.png";
 
             // 링크를 클릭하여 이미지 다운로드
             document.body.appendChild(downloadLink);

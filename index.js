@@ -281,6 +281,8 @@ function screenShot() {
     // 페이지 맨 위로 스크롤
     window.scrollTo(0, 0);
 
+    var storeName = document.getElementById("storeName").value;
+
     // 스크롤 위치가 맨 위로 이동한 후 스크린샷 찍기
     setTimeout(() => {
         // 현재 페이지 전체를 스크린샷으로 찍기
@@ -289,10 +291,13 @@ function screenShot() {
             // 이미지 데이터 URL 얻기
             var imageDataURL = canvas.toDataURL("image/png");
 
+            // 파일명 설정 (storeName을 이용하여 동적으로 생성)
+            var fileName = storeName + " 견적서.png";
+
             // 이미지를 저장할 링크 생성
             var downloadLink = document.createElement("a");
             downloadLink.href = imageDataURL;
-            downloadLink.download = "견적서.png";
+            downloadLink.download = fileName;
 
             // 링크를 클릭하여 이미지 다운로드
             document.body.appendChild(downloadLink);

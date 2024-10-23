@@ -1,250 +1,146 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>COMPANY NAME</title>
 
-	<title>AllRounder</title>
+    <meta
+      name="description"
+      content="Source code generated using layoutit.com"
+    />
+    <meta name="author" content="LayoutIt!" />
 
-	<meta name="description" content="Source code generated using layoutit.com">
-	<meta name="author" content="LayoutIt!">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./style.css" rel="stylesheet" />
 
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="./style.css" rel="stylesheet">
+    <!-- 파비콘 경고 방지 -->
+    <link rel="shortcut icon" href="#" />
+  </head>
 
-</head>
+  <body>
+    <div class="container-fluid">
+      <!-- header -->
+      <div class="row sticky-top bg-dark mb-3" id="header">
+        <div class="col-md-12">
+          <h3 class="text-center text-light p-3">견적서</h3>
+        </div>
+      </div>
+      <!-- storeName -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <h5 class="card-header">매장명</h5>
+            <div class="card-body">
+              <p class="card-text">
+                <input
+                  type="text"
+                  id="storeName"
+                  class="form-control"
+                  style="border: none"
+                />
+                <!-- style="direction: rtl;"> -->
+              </p>
+            </div>
+            <div class="card-footer">
+              <div id="quoteDate">
+                <p>견적일 : <span></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- COMPANY -->
+        <div class="col-md-6">
+          <table class="table table-sm">
+            <tbody>
+              <tr>
+                <th scope="row">상호</th>
+                <td>COMPANY NAME</td>
+              </tr>
+              <tr>
+                <th scope="row">사업자등록번호</th>
+                <td>000-00-00000</td>
+              </tr>
+              <tr>
+                <th scope="row">성명</th>
+                <td>NAME</td>
+              </tr>
+              <tr>
+                <th scope="row">주소</th>
+                <td>XXXXX시 XX구 XXX로 XX X층</td>
+              </tr>
+              <tr>
+                <th scope="row">연락처</th>
+                <td>000-000-0000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- 견적금액 -->
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 50%">견적금액(부가세포함)</th>
+                <th class="d-flex justify-content-between px-3">
+                  <span>일금</span>
+                  <span id="totalWithVat1"></span>
+                  <span>
+                    <span>&lpar;₩</span>
+                    <span class="user-select-all" id="totalWithVat2">₩0</span>
+                    <span id="totalWithVat3"></span>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- 아코디언 -->
+          <div class="accordion" id="accordionPanelsStayOpenExample"></div>
+        </div>
+      </div>
+      <!-- 공급가액 합계 -->
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <td>공급가액합계</td>
+                <td class="d-flex justify-content-end">
+                  <span class="user-select-all" id="totalAmount">0</span>
+                  &nbsp;(부가세 별도)
+                </td>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+      <!-- 비고 -->
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-text w-25 px-4"> 비고</span>
+              <textarea
+                class="form-control"
+                aria-label="With textarea"
+                style="height: 100px"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<body>
-	<div class="container-fluid">
-		<div class="row sticky-top bg-dark mb-3" id="header">
-			<div class="col-md-12">
-				<h3 class="text-center text-light p-3">
-					견적서
-				</h3>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="card">
-					<h5 class="card-header">
-						매장명
-					</h5>
-					<div class="card-body">
-						<p class="card-text">
-							<input type="text" id="storeName" class="form-control" style="border: none;" />
-							<!-- style="direction: rtl;"> -->
-						</p>
-					</div>
-					<div class="card-footer">
-						<div id="quoteDate">
-							<p>견적일 : <span></span></p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<table class="table table-sm">
-					<tbody>
-						<tr>
-							<th scope="row">상호</th>
-							<td>ALL ROUNDER</td>
-						</tr>
-						<tr>
-							<th scope="row">사업자등록번호</th>
-							<td>544-17-01958</td>
-						</tr>
-						<tr>
-							<th scope="row">성명</th>
-							<td>정창훈 & 한영균</td>
-						</tr>
-						<tr>
-							<th scope="row">주소</th>
-							<td>부산광역시 연제구 쌍미천로89 2층</td>
-						</tr>
-						<tr>
-							<th scope="row">연락처</th>
-							<td>051-851-3355</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<!-- <table class="table">
-					<thead>
-					   <tr>
-						  <th>견적금액(부가세포함)</th>
-						  <th class="d-flex justify-content-end">
-							<span id="totalWithVat1"></span>
-							<span class="user-select-all" id="totalWithVat2">₩0</span>
-							<span id="totalWithVat3"></span>
-						</th>
-					   </tr>
-					</thead>
-				 </table> -->
-				<table class="table">
-					<thead>
-						<tr>
-							<th style="width: 50%;">견적금액(부가세포함)</th>
-							<th class="d-flex justify-content-between px-3">
-								<span>일금</span>
-								<span id="totalWithVat1"></span>
-								<span>
-									<span>(₩</span>
-									<span class="user-select-all" id="totalWithVat2">₩0</span>
-									<span id="totalWithVat3"></span>
-								</span>
-							</th>
-						</tr>
-					</thead>
-				</table>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<!-- 아코디언 -->
-				<div class="accordion" id="accordionPanelsStayOpenExample">
-					<!-- 첫 번째 아코디언 아이템 -->
-					<div class="accordion-item" id="accordion1">
-						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-								aria-controls="panelsStayOpen-collapseOne">
-								필수사항
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingOne">
-							<div class="accordion-body">
-								<!-- <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
-								<table class="table table-hover table-bordered" id="quoteTable">
-									<thead>
-										<tr>
-											<th>구분</th>
-											<th>수량</th>
-											<th>단가</th>
-											<th>합계</th>
-											<th>비고</th>
-										</tr>
-									</thead>
-									<tbody>
-										<!-- 첫 번째 행 -->
-										<tr>
-											<td>
-												<select id="selectOptions1" onchange="addRow('selectOptions1')">
-													<optgroup label="필수사항">
-														<!-- <option value="none">필수사항</option> -->
-														<option value="기본 3D 공간촬영 (20평 기준)">기본 3D 공간촬영 (20평 기준)</option>
-														<option value="서버유지보수비">서버유지보수비</option>
-														<option value="서버유지보수비 1년">서버유지보수비 1년</option>
-														<option value="UI 커스텀">UI 커스텀</option>
-														<option value="트림 보정작업">트림 보정작업</option>
-														<option value="태그">태그</option>
-														<option value="평수 추가">평수 추가</option>
-													</optgroup>
-												</select>
-											</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-									</tbody>
-								</table>
-								<button type="button" class="btn btn-outline-primary"
-									onclick="selectRequiredOptionsOnce('selectOptions1')">모두 추가</button>
-								<button type="button" class="btn btn-danger"
-									onclick="clearAccordionTableExceptFirstRow1()">행 모두 지우기</button>
-							</div>
-						</div>
-					</div>
-					<!-- 두 번째 아코디언 아이템 -->
-					<div class="accordion-item" id="accordion2">
-						<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseTwo">
-								선택사항
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-							<div class="accordion-body">
-								<table class="table table-hover table-bordered" id="quoteTable">
-									<thead>
-										<tr>
-											<th>구분</th>
-											<th>수량</th>
-											<th>단가</th>
-											<th>합계</th>
-											<th>비고</th>
-										</tr>
-									</thead>
-									<tbody>
-										<!-- 두 번째 행 -->
-										<tr>
-											<td>
-												<select  id="selectOptions2" onchange="addRow('selectOptions2')">
-													<!-- <option value="none">선택사항</option> -->
-													<optgroup label="선택사항">
-														<option value="색감 보정작업">색감 보정작업</option>
-														<option value="네비게이션">네비게이션</option>
-													</optgroup>
-													<optgroup label="--------------------------">
-														<option value="공간 사진촬영">공간 사진촬영</option>
-														<option value="공간 마케팅촬영">공간 마케팅촬영</option>
-														<option value="드론 항공촬영">드론 항공촬영</option>
-														<option value="인터뷰촬영">인터뷰촬영</option>
-													</optgroup>
-												</select>
-											</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-									</tbody>
-								</table>
-								<button type="button" class="btn btn-outline-primary"
-									onclick="selectRequiredOptionsOnce('selectOptions2')">모두 추가</button>
-								<button type="button" class="btn btn-danger"
-									onclick="clearAccordionTableExceptFirstRow2()">행 모두 지우기</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<table class="table">
-					<thead>
-						<tr>
-							<td>공급가액합계</td>
-							<td class="d-flex justify-content-end"><span class="user-select-all"
-									id="totalAmount">0</span> &nbsp;(부가세 별도)</td>
-						</tr>
-					</thead>
-				</table>
-			</div>
-		</div>
-		<div class="row mb-3">
-			<div class="col-md-12">
-				<div class="form-group">
-					<div class="input-group">
-						<span class="input-group-text w-25 px-4"> 비고</span>
-						<textarea class="form-control" aria-label="With textarea" style="height: 100px"></textarea>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script src="js/bootstrap.min.js"></script>
-	<script type="module" src="./index.js"></script>
-	<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-</body>
-
+    <script src="js/bootstrap.min.js"></script>
+    <script type="module" src="./index.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  </body>
 </html>
